@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Buddy — Where Data Meets Digital Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white:#FFFFFF; --off-white:#F8FAFC; --ink:#080F1E; --ink-mid:#1E293B;
+    --slate:#64748B; --border:#E2E8F0; --accent:#5C6FFF; --accent-light:#EEF0FF;
+    --font:'DM Sans',system-ui,sans-serif;
+  }
+  @media(prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --white:#0D1117; --off-white:#111827; --ink:#F1F5F9; --ink-mid:#CBD5E1;
+      --slate:#94A3B8; --border:#1E293B; --accent:#7C8FFF; --accent-light:#1A1F3A;
+    }
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{font-family:var(--font);color:var(--ink);background:var(--white);scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+  body{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+  img{max-width:100%;display:block;} a{color:inherit;text-decoration:none;}
+
+  /* NAV */
+  nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .nav-logo{font-size:1.125rem;font-weight:700;letter-spacing:-0.02em;color:var(--ink);}
+  .nav-logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{font-size:0.875rem;font-weight:500;color:var(--slate);transition:color 0.2s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{background:var(--ink);color:var(--white)!important;padding:0.5rem 1.25rem;border-radius:6px;font-size:0.875rem;font-weight:500;transition:background 0.2s;}
+  .nav-cta:hover{background:var(--accent)!important;color:#fff!important;}
+  .nav-mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--ink);}
+
+  /* HERO */
+  .hero{padding:7rem 5vw 6rem;max-width:1200px;margin:0 auto;}
+  .hero-tag{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.8125rem;font-weight:500;color:var(--accent);margin-bottom:2rem;background:var(--accent-light);padding:0.375rem 0.875rem;border-radius:100px;}
+  .hero-tag::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;}
+  .hero h1{font-size:clamp(2.75rem,6vw,5rem);font-weight:700;line-height:1.08;letter-spacing:-0.035em;color:var(--ink);max-width:16ch;margin-bottom:1.5rem;}
+  .hero p{font-size:1.125rem;font-weight:300;color:var(--slate);max-width:50ch;line-height:1.7;margin-bottom:2.5rem;}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
+  .btn-primary{background:var(--accent);color:#fff;padding:0.875rem 2rem;border-radius:8px;font-size:0.9375rem;font-weight:600;font-family:var(--font);border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;display:inline-block;}
+  .btn-primary:hover{background:#4857e8;transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--ink);padding:0.875rem 2rem;border-radius:8px;font-size:0.9375rem;font-weight:500;font-family:var(--font);border:1.5px solid var(--border);cursor:pointer;transition:border-color 0.2s,transform 0.15s;display:inline-block;}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-1px);}
+  .hero-stats{display:flex;gap:3rem;margin-top:5rem;padding-top:2.5rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+  .stat-number{font-size:2rem;font-weight:700;letter-spacing:-0.04em;color:var(--ink);line-height:1;margin-bottom:0.375rem;}
+  .stat-label{font-size:0.8125rem;font-weight:400;color:var(--slate);}
+
+  /* CLIENTS BAR */
+  .clients-bar{background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem 5vw;}
+  .clients-label{text-align:center;font-size:0.75rem;font-weight:500;color:var(--slate);letter-spacing:0.08em;margin-bottom:1.5rem;text-transform:uppercase;}
+  .clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:960px;margin:0 auto;}
+  .client-tile{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:center;min-height:64px;}
+  .client-tile span{font-size:0.875rem;font-weight:600;color:var(--slate);text-align:center;line-height:1.3;}
+
+  /* SECTION BASE */
+  .section{padding:6rem 5vw;max-width:1200px;margin:0 auto;}
+  .section-full{padding:6rem 5vw;}
+  .section-label{font-size:0.8125rem;font-weight:500;color:var(--accent);margin-bottom:1rem;display:block;}
+  .section-title{font-size:clamp(1.875rem,3.5vw,2.75rem);font-weight:700;letter-spacing:-0.03em;line-height:1.15;color:var(--ink);max-width:22ch;margin-bottom:1rem;}
+  .section-subtitle{font-size:1rem;font-weight:300;color:var(--slate);max-width:52ch;line-height:1.75;margin-bottom:3.5rem;}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .service-card{padding:2.5rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background 0.2s;}
+  .service-card:nth-child(2n){border-right:none;}
+  .service-card:nth-child(3),.service-card:nth-child(4){border-bottom:none;}
+  .service-card:hover{background:var(--off-white);}
+  .service-icon{width:44px;height:44px;background:var(--accent-light);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;}
+  .service-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+  .service-card h3{font-size:1.125rem;font-weight:600;color:var(--ink);margin-bottom:0.75rem;letter-spacing:-0.02em;}
+  .service-card p{font-size:0.9rem;font-weight:400;color:var(--slate);line-height:1.7;margin-bottom:1.5rem;}
+  .service-list{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+  .service-list li{font-size:0.8125rem;font-weight:500;color:var(--slate);display:flex;align-items:center;gap:0.5rem;}
+  .service-list li::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+
+  /* INDUSTRIES */
+  .industries-row{display:flex;flex-wrap:wrap;gap:0.625rem;margin-top:2.5rem;}
+  .industry-pill{background:var(--accent-light);color:var(--accent);font-size:0.8125rem;font-weight:600;padding:0.5rem 1rem;border-radius:100px;}
+
+  /* CASE STUDY */
+  .case-section{background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .case-inner{max-width:1200px;margin:0 auto;padding:6rem 5vw;}
+  .case-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  .case-left{padding:3rem;border-right:1px solid var(--border);}
+  .case-tag{display:inline-block;background:#FFF7ED;color:#C2570A;font-size:0.75rem;font-weight:600;padding:0.3rem 0.75rem;border-radius:100px;margin-bottom:1.5rem;}
+  .case-left h3{font-size:1.5rem;font-weight:700;letter-spacing:-0.03em;color:var(--ink);margin-bottom:0.75rem;line-height:1.2;}
+  .case-left .period{font-size:0.875rem;color:var(--slate);margin-bottom:2rem;}
+  .case-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;}
+  .case-metric{background:var(--off-white);border-radius:10px;padding:1.25rem;}
+  .case-metric-val{font-size:1.75rem;font-weight:700;letter-spacing:-0.04em;color:var(--ink);margin-bottom:0.25rem;}
+  .case-metric-lbl{font-size:0.75rem;color:var(--slate);font-weight:400;}
+  .case-roas{background:var(--accent);border-radius:10px;padding:1.25rem;grid-column:span 2;display:flex;justify-content:space-between;align-items:center;}
+  .case-roas-val{font-size:2.25rem;font-weight:700;letter-spacing:-0.04em;color:#fff;}
+  .case-roas-lbl{font-size:0.875rem;color:rgba(255,255,255,0.75);text-align:right;}
+  .case-right{padding:3rem;}
+  .case-right h4{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:1.25rem;letter-spacing:-0.01em;}
+  .case-strategy{list-style:none;display:flex;flex-direction:column;gap:1rem;}
+  .case-strategy li{display:flex;gap:0.875rem;align-items:flex-start;}
+  .strategy-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;flex-shrink:0;margin-top:0.35rem;}
+  .case-strategy li p{font-size:0.875rem;color:var(--slate);line-height:1.65;}
+  .case-strategy li strong{display:block;font-size:0.875rem;font-weight:600;color:var(--ink);margin-bottom:0.2rem;}
+
+  /* PROCESS */
+  .process-section{border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .process-step{padding:2rem 2rem 2rem 0;position:relative;}
+  .process-step:not(:last-child)::after{content:'';position:absolute;right:0;top:2rem;width:1px;height:40px;background:var(--border);}
+  .step-num{font-size:0.75rem;font-weight:600;color:var(--accent);margin-bottom:0.875rem;font-feature-settings:"tnum";}
+  .process-step h3{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:0.5rem;letter-spacing:-0.01em;}
+  .process-step p{font-size:0.85rem;color:var(--slate);line-height:1.65;font-weight:400;}
+
+  /* DARK SECTION */
+  .dark-section{background:#080F1E;padding:7rem 5vw;}
+  .dark-section .section-label{color:#7C8FFF;}
+  .dark-section .section-title{color:#F1F5F9;max-width:24ch;}
+  .dark-section .section-subtitle{color:#64748B;}
+  .dark-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+  .dark-features{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem;}
+  .dark-feature{display:flex;gap:1rem;align-items:flex-start;}
+  .feature-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;flex-shrink:0;margin-top:0.4rem;}
+  .dark-feature h4{font-size:0.9375rem;font-weight:600;color:#CBD5E1;margin-bottom:0.25rem;letter-spacing:-0.01em;}
+  .dark-feature p{font-size:0.85rem;color:#475569;line-height:1.65;}
+  .dark-right{display:flex;flex-direction:column;gap:1rem;}
+  .metric-card{background:#111827;border:1px solid #1E293B;border-radius:10px;padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .metric-label{font-size:0.85rem;color:#64748B;font-weight:400;}
+  .metric-value{font-size:1.5rem;font-weight:700;color:#F1F5F9;letter-spacing:-0.03em;}
+  .metric-delta{font-size:0.8rem;font-weight:600;color:#4ADE80;background:rgba(74,222,128,0.1);padding:0.2rem 0.5rem;border-radius:100px;}
+
+  /* ABOUT */
+  .about-section{background:var(--white);}
+  .about-inner{max-width:1200px;margin:0 auto;padding:6rem 5vw;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+  .about-left .section-subtitle{margin-bottom:2rem;}
+  .about-pills{display:flex;flex-direction:column;gap:0.875rem;}
+  .about-pill{display:flex;gap:1rem;align-items:flex-start;background:var(--off-white);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;}
+  .pill-icon{width:36px;height:36px;background:var(--accent-light);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .pill-icon svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+  .pill-text h4{font-size:0.875rem;font-weight:600;color:var(--ink);margin-bottom:0.125rem;}
+  .pill-text p{font-size:0.8125rem;color:var(--slate);line-height:1.55;}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .about-stat{background:var(--off-white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;}
+  .about-stat-val{font-size:2rem;font-weight:700;letter-spacing:-0.04em;color:var(--ink);margin-bottom:0.375rem;}
+  .about-stat-lbl{font-size:0.8125rem;color:var(--slate);font-weight:400;line-height:1.4;}
+
+  /* FAQ */
+  .faq-section{background:var(--off-white);border-top:1px solid var(--border);}
+  .faq-inner{max-width:800px;margin:0 auto;padding:6rem 5vw;}
+  .faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0;}
+  .faq-question{font-size:1rem;font-weight:600;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;letter-spacing:-0.01em;}
+  .faq-toggle{width:24px;height:24px;border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color 0.2s,transform 0.2s;}
+  .faq-toggle svg{width:12px;height:12px;stroke:var(--slate);fill:none;stroke-width:2;stroke-linecap:round;transition:transform 0.25s;}
+  .faq-answer{font-size:0.9rem;color:var(--slate);line-height:1.75;max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.2s;font-weight:400;}
+  .faq-item.open .faq-answer{max-height:200px;padding-top:0.875rem;}
+  .faq-item.open .faq-toggle{border-color:var(--accent);}
+  .faq-item.open .faq-toggle svg{transform:rotate(45deg);stroke:var(--accent);}
+
+  /* CONTACT */
+  .contact-section{background:var(--white);border-top:1px solid var(--border);}
+  .contact-inner{max-width:1200px;margin:0 auto;padding:6rem 5vw;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+  .contact-form{display:flex;flex-direction:column;gap:1rem;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .form-group{display:flex;flex-direction:column;gap:0.375rem;}
+  .form-group label{font-size:0.8125rem;font-weight:500;color:var(--ink);}
+  .form-group input,.form-group select,.form-group textarea{font-family:var(--font);font-size:0.9rem;font-weight:400;color:var(--ink);background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:0.75rem 1rem;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);}
+  .form-group textarea{resize:vertical;min-height:120px;line-height:1.6;}
+  .contact-details{display:flex;flex-direction:column;gap:1.25rem;margin-top:2.5rem;padding-top:2.5rem;border-top:1px solid var(--border);}
+  .contact-detail{display:flex;align-items:center;gap:0.875rem;}
+  .detail-icon{width:36px;height:36px;background:var(--accent-light);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .detail-icon svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+  .detail-text{font-size:0.875rem;color:var(--slate);}
+  .detail-text strong{display:block;font-size:0.875rem;font-weight:600;color:var(--ink);margin-bottom:0.125rem;}
+
+  /* FOOTER */
+  footer{background:#080F1E;color:#fff;padding:4rem 5vw 2rem;}
+  .footer-inner{max-width:1200px;margin:0 auto;}
+  .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:2rem;}
+  .footer-brand p{font-size:0.875rem;color:rgba(255,255,255,0.45);line-height:1.7;margin-top:0.75rem;max-width:30ch;font-weight:300;}
+  .footer-col h4{font-size:0.8125rem;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:1rem;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.625rem;}
+  .footer-col ul a{font-size:0.8125rem;color:rgba(255,255,255,0.4);font-weight:400;transition:color 0.2s;}
+  .footer-col ul a:hover{color:rgba(255,255,255,0.85);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+  .footer-bottom p{font-size:0.8rem;color:rgba(255,255,255,0.3);}
+  .footer-links{display:flex;gap:1rem;}
+  .footer-links a{font-size:0.8rem;color:rgba(255,255,255,0.3);transition:color 0.2s;}
+  .footer-links a:hover{color:rgba(255,255,255,0.8);}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:1.5rem 5vw;gap:1.25rem;z-index:99;}
+    .nav-mobile-toggle{display:block;}
+    .services-grid{grid-template-columns:1fr;}
+    .service-card{border-right:none;}
+    .service-card:nth-child(3){border-bottom:1px solid var(--border);}
+    .service-card:nth-child(4){border-bottom:none;}
+    .process-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+    .process-step::after{display:none;}
+    .process-step{padding:0;}
+    .dark-grid{grid-template-columns:1fr;gap:3rem;}
+    .case-card{grid-template-columns:1fr;}
+    .case-left{border-right:none;border-bottom:1px solid var(--border);}
+    .about-inner{grid-template-columns:1fr;gap:3rem;}
+    .contact-inner{grid-template-columns:1fr;gap:3rem;}
+    .footer-top{grid-template-columns:1fr 1fr;gap:2rem;}
+    .hero-stats{gap:2rem;}
+    .form-row{grid-template-columns:1fr;}
+    .clients-grid{grid-template-columns:repeat(2,1fr);}
+    .about-stats{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:560px){
+    .hero{padding:4rem 5vw 3.5rem;}
+    .process-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;align-items:flex-start;}
+    .hero-stats{flex-direction:column;gap:1.5rem;}
+    .case-metrics{grid-template-columns:1fr;}
+    .case-roas{grid-column:span 1;}
+    .clients-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Digital<span>Buddy</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#case-studies">Case Studies</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#contact" class="nav-cta">Get Free Quote</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+      <line x1="3" y1="7" x2="19" y2="7"/><line x1="3" y1="12" x2="19" y2="12"/><line x1="3" y1="17" x2="19" y2="17"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Digital Marketing Agency — Pakistan</div>
+  <h1>Where Data Meets Digital Growth.</h1>
+  <p>We don't just run ads — we engineer growth. Performance marketing, SEO, web development, and email automation that deliver measurable business results for brands across Pakistan and beyond.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Get Free Quotation</a>
+    <a href="#case-studies" class="btn-ghost">See Case Studies</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-number">10×–30×</div>
+      <div class="stat-label">Proven ROAS benchmarks</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">₨1B+</div>
+      <div class="stat-label">Digital ad spend managed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">₨4B+</div>
+      <div class="stat-label">Annual online sales portfolio</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">5+</div>
+      <div class="stat-label">Years scaling top brands</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS BAR -->
+<div class="clients-bar" id="clients">
+  <p class="clients-label">Trusted by leading brands across Pakistan</p>
+  <div class="clients-grid">
+    <div class="client-tile"><span>Fashion & Apparel</span></div>
+    <div class="client-tile"><span>Education Sector</span></div>
+    <div class="client-tile"><span>Real Estate</span></div>
+    <div class="client-tile"><span>Healthcare</span></div>
+    <div class="client-tile"><span>eCommerce Brands</span></div>
+    <div class="client-tile"><span>NGOs & Non-Profits</span></div>
+    <div class="client-tile"><span>Corporate & B2B</span></div>
+    <div class="client-tile"><span>Retail & D2C</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <span class="section-label">What we do</span>
+  <h2 class="section-title">Full-service digital marketing, built for results.</h2>
+  <p class="section-subtitle">We offer end-to-end digital solutions — from ads to websites — that bring your brand in front of the right audience and turn clicks into customers.</p>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      </div>
+      <h3>Performance Marketing</h3>
+      <p>We run performance marketing campaigns across all major platforms — Meta, Google, YouTube, TikTok, and Snapchat — helping brands from every industry reach, engage, and convert. From awareness to final sale, we plan your complete omni-channel strategy with a focus on ROI, not just reach.</p>
+      <ul class="service-list">
+        <li>Meta, Google, YouTube, TikTok & Snapchat</li>
+        <li>Full-funnel omni-channel strategy</li>
+        <li>Creative testing and audience segmentation</li>
+        <li>Data-backed budget scaling</li>
+        <li>Retargeting automation and ROAS optimization</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      </div>
+      <h3>Search Engine Optimization</h3>
+      <p>We do SEO the smart way — covering everything from technical fixes and keyword optimization to content strategy and Google ranking improvements. We handle both paid and organic SEO for all industries, ensuring your brand gets found fast and ranks higher than your competitors.</p>
+      <ul class="service-list">
+        <li>Technical SEO audits and on-page fixes</li>
+        <li>Keyword strategy and content mapping</li>
+        <li>Google ranking and visibility improvements</li>
+        <li>Paid and organic SEO across all industries</li>
+        <li>Core Web Vitals and page experience</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <h3>Email Marketing</h3>
+      <p>We create and manage email marketing campaigns that actually drive results — from welcome series and abandoned cart automations to monthly newsletters and customer re-engagement flows. Whether you're selling products or services, your emails will be beautifully designed, personalized, and built for conversions.</p>
+      <ul class="service-list">
+        <li>Welcome series and onboarding flows</li>
+        <li>Abandoned cart and browse recovery</li>
+        <li>Monthly newsletters and campaigns</li>
+        <li>Customer re-engagement sequences</li>
+        <li>Klaviyo and Mailchimp automation setup</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <h3>Website Development</h3>
+      <p>Your website is your brand's digital home — and we build it to perform. From eCommerce stores to corporate websites, we design fast, mobile-friendly, and conversion-focused sites that make your business look professional and sell better. Every site is SEO-ready, easy to manage, and built for long-term growth.</p>
+      <ul class="service-list">
+        <li>eCommerce and Shopify stores</li>
+        <li>Corporate and landing page design</li>
+        <li>Fast, mobile-friendly and SEO-ready</li>
+        <li>CRO and conversion optimization</li>
+        <li>Analytics, tracking and performance setup</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div style="margin-top:3rem;">
+    <span class="section-label">Industries we serve</span>
+    <div class="industries-row">
+      <span class="industry-pill">Fashion & Apparel</span>
+      <span class="industry-pill">Education</span>
+      <span class="industry-pill">Real Estate</span>
+      <span class="industry-pill">Healthcare</span>
+      <span class="industry-pill">eCommerce & D2C</span>
+      <span class="industry-pill">NGOs</span>
+      <span class="industry-pill">Corporate & B2B</span>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<div class="case-section" id="case-studies">
+  <div class="case-inner">
+    <span class="section-label">Case study</span>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">Real results, real numbers.</h2>
+    <div class="case-card">
+      <div class="case-left">
+        <span class="case-tag">Apparel Brand · Pakistan</span>
+        <h3>₨734 Million in Sales from ₨47.8 Million Ad Spend</h3>
+        <p class="period">January – September 2025 &nbsp;·&nbsp; 9-month campaign</p>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="case-metric-val">₨734M</div>
+            <div class="case-metric-lbl">Total online sales generated</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-val">₨47.8M</div>
+            <div class="case-metric-lbl">Total ad spend invested</div>
+          </div>
+          <div class="case-roas">
+            <div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-bottom:0.25rem;">Return on Ad Spend</div>
+              <div class="case-roas-val">15.36× ROAS</div>
+            </div>
+            <div class="case-roas-lbl">Every ₨1 spent<br>returned ₨15.36</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-right">
+        <h4>Performance Strategy</h4>
+        <ul class="case-strategy">
+          <li>
+            <div class="strategy-dot"></div>
+            <div>
+              <strong>Omni-channel ad strategy</strong>
+              <p>Full-funnel campaigns across Meta, Google, and YouTube working in coordination — awareness through to final conversion — rather than isolated platform-by-platform campaigns.</p>
+            </div>
+          </li>
+          <li>
+            <div class="strategy-dot"></div>
+            <div>
+              <strong>Creative segmentation by audience</strong>
+              <p>Ad creatives were split by audience interest and product category to improve CTR and conversion rate across cold, warm, and retargeting layers simultaneously.</p>
+            </div>
+          </li>
+          <li>
+            <div class="strategy-dot"></div>
+            <div>
+              <strong>Data-backed budget scaling</strong>
+              <p>Budgets were increased only on high-performing ad sets and creatives, with underperformers cut fast — ensuring spend efficiency at every stage of the scaling curve.</p>
+            </div>
+          </li>
+          <li>
+            <div class="strategy-dot"></div>
+            <div>
+              <strong>Retargeting automation</strong>
+              <p>Repeat visitors were converted into buyers with personalized retargeting messaging — reducing RTO risk and improving revenue per session on warm audiences.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<div class="section-full process-section">
+  <div class="section" style="padding-top:0;padding-bottom:0;max-width:1200px;">
+    <span class="section-label">How we work</span>
+    <h2 class="section-title">From brief to results — without the guesswork.</h2>
+    <p class="section-subtitle" style="margin-bottom:3rem;">Every engagement follows the same deliberate process so nothing falls through the cracks.</p>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-num">Step 1</div>
+        <h3>Discovery</h3>
+        <p>We map your current position — traffic, conversions, spend, unit economics — before writing a single word of strategy.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">Step 2</div>
+        <h3>Custom Strategy</h3>
+        <p>A tailored growth plan built for your audience, industry, and objectives. Never cookie-cutter. Always built to scale.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">Step 3</div>
+        <h3>Execution</h3>
+        <p>We build, launch, and iterate fast with transparent reporting dashboards and regular reviews at every step.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">Step 4</div>
+        <h3>Scale</h3>
+        <p>What works gets more investment. What doesn't gets cut. We compound on wins until the growth curve changes shape.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US (DARK) -->
+<div class="dark-section">
+  <div class="dark-grid">
+    <div>
+      <span class="section-label">Why Digital Buddy</span>
+      <h2 class="section-title">We measure ourselves by one thing — your numbers.</h2>
+      <div class="dark-features">
+        <div class="dark-feature">
+          <div class="feature-dot"></div>
+          <div>
+            <h4>ROI-driven metrics, always</h4>
+            <p>We track ROAS, cost per lead, customer acquisition cost, and lifetime value — not impressions and clicks. Every campaign contributes directly to your business growth.</p>
+          </div>
+        </div>
+        <div class="dark-feature">
+          <div class="feature-dot"></div>
+          <div>
+            <h4>Proven at scale</h4>
+            <p>Over ₨1 Billion in ad spend managed and ₨4 Billion+ in online sales generated. We know what large-scale digital looks like — and how to build toward it.</p>
+          </div>
+        </div>
+        <div class="dark-feature">
+          <div class="feature-dot"></div>
+          <div>
+            <h4>Transparent by default</h4>
+            <p>Live reporting dashboards and regular reviews mean you always see where your budget is going and what results it's driving. No black boxes.</p>
+          </div>
+        </div>
+        <div class="dark-feature">
+          <div class="feature-dot"></div>
+          <div>
+            <h4>Custom strategy, every time</h4>
+            <p>From funnels to creatives, everything is tailored to your audience, industry, and growth objectives. We never apply cookie-cutter strategies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dark-right">
+      <div class="metric-card">
+        <div><div class="metric-label">Proven ROAS range — fashion clients</div></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="metric-value">10×–30×</span>
+          <span class="metric-delta">verified</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div><div class="metric-label">Digital ad spend managed (total)</div></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="metric-value">₨1B+</span>
+          <span class="metric-delta">omni-ch</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div><div class="metric-label">Annual online sales portfolio managed</div></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="metric-value">₨4B+</span>
+          <span class="metric-delta">annual</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div><div class="metric-label">Websites delivered (local & international)</div></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="metric-value">50+</span>
+          <span class="metric-delta">live</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div><div class="metric-label">Years of industry experience</div></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="metric-value">5+</span>
+          <span class="metric-delta">yrs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT US -->
+<div class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <span class="section-label">About Digital Buddy</span>
+      <h2 class="section-title">We engineer growth. Not just ads.</h2>
+      <p class="section-subtitle">As a leading digital marketing agency in Pakistan, we specialize in performance marketing, SEO, web development, and email automation that deliver measurable business results. With 5+ years of industry experience and a ₨4 Billion+ annual online sales portfolio, we've helped fashion, education, and real estate brands scale profitably through data-backed strategies and funnel optimization.</p>
+      <div class="about-pills">
+        <div class="about-pill">
+          <div class="pill-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg></div>
+          <div class="pill-text">
+            <h4>Data-first approach</h4>
+            <p>Every decision is powered by data. Every campaign is built to scale.</p>
+          </div>
+        </div>
+        <div class="about-pill">
+          <div class="pill-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="pill-text">
+            <h4>Partner, not vendor</h4>
+            <p>We work as an extension of your team — keeping you informed at every step.</p>
+          </div>
+        </div>
+        <div class="about-pill">
+          <div class="pill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="pill-text">
+            <h4>Results on a timeline</h4>
+            <p>Performance campaigns drive results within days. SEO compounds over months.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-val">₨4B+</div>
+          <div class="about-stat-lbl">Annual online sales portfolio managed</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val">₨1B+</div>
+          <div class="about-stat-lbl">Digital ad spend across Meta, Google, YouTube & TikTok</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val">30×</div>
+          <div class="about-stat-lbl">Peak ROAS achieved through precise targeting and creative testing</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val">50+</div>
+          <div class="about-stat-lbl">Local and international websites delivered with exceptional UI/UX</div>
+        </div>
+        <div class="about-stat" style="grid-column:span 2;">
+          <div class="about-stat-val">5+</div>
+          <div class="about-stat-lbl">Years managing and scaling digital ad spend for top brands across Pakistan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="faq-inner">
+    <span class="section-label">Frequently asked</span>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">Questions we hear most.</h2>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        What industries do you have experience in?
+        <div class="faq-toggle"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+      </div>
+      <div class="faq-answer">We have proven expertise across fashion & apparel, education, real estate, healthcare, and NGOs. With over ₨1 Billion in digital spend managed, we understand industry-specific challenges and build strategies tailored to each sector.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        How long does it take to see results?
+        <div class="faq-toggle"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+      </div>
+      <div class="faq-answer">It depends on the service and your goals. Performance campaigns can start driving leads and sales within days, while SEO typically takes 3–6 months for noticeable improvements. We create a clear timeline at the start so you know exactly what to expect.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Do you use customized strategies or standard templates?
+        <div class="faq-toggle"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+      </div>
+      <div class="faq-answer">Every brand is unique, so we never apply cookie-cutter strategies. From funnels to creatives, everything is tailored to your audience, industry, and growth objectives — ensuring you get a personalized plan built to scale.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        How do you keep us updated on campaign performance?
+        <div class="faq-toggle"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+      </div>
+      <div class="faq-answer">We provide transparent reporting dashboards and regular reviews, so you can see exactly where your budget is going and what results it's driving. Our team works as an extension of yours — keeping you informed at every step.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        How do you measure success in digital marketing campaigns?
+        <div class="faq-toggle"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+      </div>
+      <div class="faq-answer">We track more than just impressions and clicks. Our focus is on ROI-driven metrics like ROAS, cost per lead, customer acquisition cost, and lifetime value — ensuring every campaign contributes directly to your business growth.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div>
+      <span class="section-label">Get in touch</span>
+      <h2 class="section-title">Let's grow your business through digital marketing.</h2>
+      <p class="section-subtitle">Tell us about your brand, your goals, and your current marketing — we'll come back with a free, honest assessment of how we can help.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.7 12a19.79 19.79 0 01-3-8.57A2 2 0 012.68 1.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.14a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121 16.92z"/></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Phone / WhatsApp</strong>
+            +92 322 4806724
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Email</strong>
+            yourwebcare@gmail.com
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Location</strong>
+            Johar Town, Lahore, Pakistan
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First name</label>
+          <input type="text" id="fname" placeholder="Ahmed" required>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last name</label>
+          <input type="text" id="lname" placeholder="Khan" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" placeholder="ahmed@yourbrand.com" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone / WhatsApp</label>
+        <input type="tel" id="phone" placeholder="+92 300 0000000">
+      </div>
+      <div class="form-group">
+        <label for="company">Company / Brand name</label>
+        <input type="text" id="company" placeholder="Your brand or business">
+      </div>
+      <div class="form-group">
+        <label for="service">Service you need</label>
+        <select id="service">
+          <option value="" disabled selected>Select a service</option>
+          <option>Performance Marketing</option>
+          <option>Search Engine Optimization</option>
+          <option>Email Marketing</option>
+          <option>Website Development</option>
+          <option>Full-service partnership</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="budget">Monthly ad budget</label>
+        <select id="budget">
+          <option value="" disabled selected>Select a range</option>
+          <option>Under ₨50,000</option>
+          <option>₨50,000 – ₨200,000</option>
+          <option>₨200,000 – ₨500,000</option>
+          <option>₨500,000 – ₨2,000,000</option>
+          <option>₨2,000,000+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Tell us about your goals</label>
+        <textarea id="message" placeholder="What are you trying to achieve? Share your current situation and what growth looks like for you..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;margin-top:0.5rem;" id="submitBtn">Get Free Quotation</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:#fff;font-size:1.125rem;">Digital<span style="color:#5C6FFF;">Buddy</span></div>
+        <p>Where data meets digital growth. Performance marketing, SEO, web development, and email automation for brands across Pakistan.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Performance Marketing</a></li>
+          <li><a href="#services">SEO</a></li>
+          <li><a href="#services">Email Marketing</a></li>
+          <li><a href="#services">Web Development</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#case-studies">Case Studies</a></li>
+          <li><a href="#clients">Our Clients</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+923224806724">+92 322 4806724</a></li>
+          <li><a href="mailto:yourwebcare@gmail.com">yourwebcare@gmail.com</a></li>
+          <li><a href="#contact">Johar Town, Lahore</a></li>
+          <li><a href="#contact">Get Free Quote</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Digital Buddy. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const toggle = document.getElementById('mobileToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Nav shadow on scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 10 ? '0 1px 20px rgba(0,0,0,0.06)' : 'none';
+  });
+
+  // FAQ accordion
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Message sent ✓';
+      btn.style.background = '#16a34a';
+    }, 1200);
+  }
+</script>
+</body>
+</html>

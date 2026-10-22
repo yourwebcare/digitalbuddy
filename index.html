@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Digital Buddy helps brands grow with performance marketing, e-commerce, Shopify development, SEO and marketing automation.">
+  <title>Digital Buddy | Performance Marketing & E-commerce Growth</title>
+  <style>
+    :root {
+      --bg: #080d18;
+      --panel: #101827;
+      --panel2: #131f32;
+      --text: #f7f9fc;
+      --muted: #aeb9cc;
+      --accent: #a8ff60;
+      --accent2: #66d9ff;
+      --line: rgba(255,255,255,.13);
+      --radius: 22px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(16px);
+      background: rgba(8,13,24,.82); border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; min-height:76px; }
+    .logo { font-size: 1.25rem; font-weight: 850; letter-spacing: -.04em; }
+    .logo span { color: var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:24px; color:var(--muted); font-size:.93rem; }
+    .nav-links a:hover { color:var(--accent); }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 18px; border-radius:999px; font-weight:750; border:1px solid transparent;
+      transition:transform .2s ease, background .2s ease;
+    }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { color:#08110a; background:var(--accent); }
+    .btn-outline { border-color:var(--line); background:rgba(255,255,255,.04); }
+    .hero {
+      position:relative; isolation:isolate; overflow:hidden; min-height:650px; display:flex; align-items:center;
+      background:
+        linear-gradient(90deg, rgba(8,13,24,.98) 0%, rgba(8,13,24,.88) 43%, rgba(8,13,24,.38) 100%),
+        linear-gradient(0deg, rgba(8,13,24,.82), rgba(8,13,24,.06)),
+        url("https://images.unsplash.com/photo-1460925895917-afk2c9d5f8f2?auto=format&fit=crop&w=2000&q=85") center/cover;
+    }
+    .hero:after {
+      content:""; position:absolute; z-index:-1; width:420px; height:420px; right:8%; top:14%;
+      border-radius:50%; background:rgba(168,255,96,.14); filter:blur(80px);
+    }
+    .hero-content { max-width:760px; padding:90px 0 100px; }
+    .eyebrow { display:inline-flex; gap:9px; align-items:center; color:var(--accent); font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:.76rem; }
+    .eyebrow:before { content:""; width:24px; height:2px; background:var(--accent); }
+    h1 { font-size:clamp(2.8rem, 6.4vw, 5.7rem); line-height:.99; letter-spacing:-.065em; margin:22px 0; max-width:900px; }
+    h1 em { color:var(--accent); font-style:normal; }
+    .lead { max-width:620px; font-size:clamp(1.05rem, 1.7vw, 1.22rem); color:#d0d8e7; margin:0 0 30px; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .trust { display:flex; flex-wrap:wrap; gap:18px; margin-top:34px; color:#d0d8e7; font-size:.9rem; }
+    .trust span:before { content:"✓"; color:var(--accent); font-weight:900; margin-right:8px; }
+    section { padding:92px 0; }
+    .section-head { max-width:720px; margin-bottom:38px; }
+    .section-head h2 { font-size:clamp(2rem, 4vw, 3.35rem); letter-spacing:-.05em; line-height:1.05; margin:12px 0 16px; }
+    .section-head p { color:var(--muted); margin:0; font-size:1.05rem; }
+    .stats { margin-top:-1px; background:#0d1524; border-block:1px solid var(--line); }
+    .stat-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+    .stat { padding:28px 24px; border-right:1px solid var(--line); }
+    .stat:last-child { border:0; }
+    .stat strong { display:block; font-size:clamp(1.8rem,3vw,2.6rem); letter-spacing:-.05em; color:var(--accent); line-height:1.15; }
+    .stat span { display:block; color:var(--muted); font-size:.92rem; margin-top:8px; }
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .service {
+      min-height:245px; padding:28px; border:1px solid var(--line); border-radius:var(--radius);
+      background:linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.015));
+      transition:transform .2s ease,border-color .2s ease;
+    }
+    .service:hover { transform:translateY(-4px); border-color:rgba(168,255,96,.5); }
+    .icon { width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(168,255,96,.12);color:var(--accent);font-size:1.3rem;margin-bottom:22px; }
+    .service h3 { margin:0 0 10px; font-size:1.2rem; }
+    .service p { margin:0;color:var(--muted);font-size:.96rem; }
+    .work { background:#0c1422; }
+    .case-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; }
+    .case {
+      overflow:hidden; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel);
+      display:flex; flex-direction:column; min-height:390px;
+    }
+    .case-image { min-height:210px; background-size:cover; background-position:center; position:relative; }
+    .case-image:after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(8,13,24,.65),transparent 75%); }
+    .case-body { padding:26px; }
+    .case-body .tag { color:var(--accent); text-transform:uppercase; font-size:.74rem; font-weight:800; letter-spacing:.1em; }
+    .case-body h3 { margin:8px 0; font-size:1.45rem; letter-spacing:-.03em; }
+    .case-body p { color:var(--muted); margin:0; }
+    .case-wide { grid-row:span 2; }
+    .case-wide .case-image { min-height:290px; }
+    .case-metrics { display:flex; gap:24px; margin-top:20px; flex-wrap:wrap; }
+    .case-metrics strong { display:block; font-size:1.35rem; color:var(--accent); }
+    .case-metrics small { color:var(--muted); }
+    .process-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    .step { padding:24px; border-top:1px solid var(--accent); background:rgba(255,255,255,.03); border-radius:0 0 16px 16px; }
+    .step b { color:var(--accent); font-size:.82rem; letter-spacing:.1em; }
+    .step h3 { margin:12px 0 8px; }
+    .step p { margin:0; color:var(--muted); font-size:.95rem; }
+    .image-band {
+      min-height:380px; border-radius:28px; padding:48px; display:flex; align-items:end; overflow:hidden;
+      background:
+        linear-gradient(90deg,rgba(8,13,24,.94),rgba(8,13,24,.45)),
+        linear-gradient(0deg,rgba(8,13,24,.7),transparent),
+        url("https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1800&q=85") center/cover;
+      border:1px solid var(--line);
+    }
+    .image-band > div { max-width:680px; }
+    .image-band h2 { font-size:clamp(2rem,4vw,3.4rem); line-height:1.05; letter-spacing:-.05em; margin:12px 0 16px; }
+    .image-band p { color:#d0d8e7; max-width:570px; }
+    .cta { text-align:center; background:radial-gradient(ellipse at 50% 0%,rgba(168,255,96,.11),transparent 58%); }
+    .cta-card { border:1px solid var(--line); border-radius:28px; padding:58px 24px; background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.015)); }
+    .cta h2 { max-width:760px; margin:14px auto; font-size:clamp(2.1rem,4.5vw,3.8rem); line-height:1.04; letter-spacing:-.055em; }
+    .cta p { color:var(--muted); max-width:600px; margin:0 auto 26px; }
+    footer { border-top:1px solid var(--line); padding:30px 0; color:var(--muted); font-size:.9rem; }
+    .footer-inner { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .footer-links { display:flex; gap:18px; flex-wrap:wrap; }
+    @media (max-width:850px) {
+      .nav-links { display:none; }
+      .hero { min-height:600px; background-position:58% center; }
+      .stat-grid { grid-template-columns:repeat(2,1fr); }
+      .stat:nth-child(2) { border-right:0; }
+      .stat:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+      .services-grid { grid-template-columns:repeat(2,1fr); }
+      .case-grid { grid-template-columns:1fr; }
+      .case-wide { grid-row:auto; }
+      .process-grid { grid-template-columns:repeat(2,1fr); }
+      .image-band { padding:30px; }
+    }
+    @media (max-width:560px) {
+      .wrap { width:min(var(--max),calc(100% - 28px)); }
+      .nav-inner { min-height:66px; }
+      .nav .btn { padding:10px 13px; font-size:.85rem; }
+      .hero { min-height:620px; background-position:62% center; }
+      .hero-content { padding:74px 0; }
+      section { padding:68px 0; }
+      .stat { padding:22px 16px; }
+      .services-grid,.process-grid { grid-template-columns:1fr; }
+      .service { min-height:unset; }
+      .image-band { min-height:420px; padding:24px; }
+      .cta-card { padding:42px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="#top" aria-label="Digital Buddy home">digital<span>buddy</span>.</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a><a href="#results">Results</a><a href="#process">Our approach</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn-primary" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-content">
+          <div class="eyebrow">Performance. Technology. Growth.</div>
+          <h1>Make your next stage of growth <em>happen.</em></h1>
+          <p class="lead">Digital Buddy helps ambitious brands grow online through performance marketing, e-commerce strategy, conversion-focused websites and automation that turns more visits into customers.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Talk about your growth <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="#results">Explore our results</a>
+          </div>
+          <div class="trust"><span>Performance-led strategy</span><span>Commerce-focused execution</span><span>Built around business outcomes</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats" id="results">
+      <div class="wrap stat-grid">
+        <div class="stat"><strong>PKR 1B+</strong><span>Performance and omnichannel media spend managed</span></div>
+        <div class="stat"><strong>50+</strong><span>Websites and commerce experiences delivered</span></div>
+        <div class="stat"><strong>10–30x</strong><span>ROAS achieved across selected campaigns</span></div>
+        <div class="stat"><strong>PKR 4B+</strong><span>Annual online sales across portfolio brands</span></div>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">What we do</div>
+          <h2>Connected services. One clear goal: growth.</h2>
+          <p>From acquisition to checkout and repeat purchase, we connect the channels, technology and customer experience that help your business scale.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service"><div class="icon">↗</div><h3>Performance Marketing</h3><p>Campaign strategy, creative testing, paid media and ongoing optimisation across Meta, Google, YouTube, TikTok and other relevant platforms.</p></article>
+          <article class="service"><div class="icon">▦</div><h3>E-commerce Growth</h3><p>Commercial planning, merchandising, customer journeys and omnichannel thinking designed to improve online sales and contribution.</p></article>
+          <article class="service"><div class="icon">◇</div><h3>Shopify & Shopify Plus</h3><p>Store builds, migrations, storefront improvements and practical integrations for a faster, easier shopping experience.</p></article>
+          <article class="service"><div class="icon">⌕</div><h3>SEO & Content</h3><p>Technical foundations, search-led content and site improvements that help qualified customers discover your brand.</p></article>
+          <article class="service"><div class="icon">✉</div><h3>CRM & Automation</h3><p>Email and WhatsApp journeys that support welcome flows, abandoned carts, customer retention and repeat orders.</p></article>
+          <article class="service"><div class="icon">◎</div><h3>UI/UX & Conversion</h3><p>Conversion-focused design, landing pages and user-experience improvements based on customer behaviour and business priorities.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Growth in action</div>
+          <h2>Business outcomes over vanity metrics.</h2>
+          <p>We bring together media, commerce and customer experience. The examples below are portfolio highlights; use only the claims you can substantiate publicly.</p>
+        </div>
+        <div class="case-grid">
+          <article class="case case-wide">
+            <div class="case-image" style="background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=85')" role="img" aria-label="Modern apparel retail store"></div>
+            <div class="case-body">
+              <div class="tag">Fashion e-commerce</div>
+              <h3>Scale the store, not just the spend.</h3>
+              <p>Connect paid acquisition, storefront conversion, merchandising and fulfilment so growth is supported by the entire customer journey.</p>
+              <div class="case-metrics"><div><strong>PKR 2.5B → 4B</strong><small>Online sales growth example</small></div><div><strong>Omnichannel</strong><small>Commerce operations</small></div></div>
+            </div>
+          </article>
+          <article class="case">
+            <div class="case-image" style="background-image:url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1100&q=85')" role="img" aria-label="Team collaborating on business strategy"></div>
+            <div class="case-body">
+              <div class="tag">New brand growth</div>
+              <h3>From early traction to momentum.</h3>
+              <p>A focused growth programme combining paid media, creative iteration and a better online buying experience.</p>
+              <div class="case-metrics"><div><strong>1M → 8M</strong><small>Monthly sales example (PKR)</small></div></div>
+            </div>
+          </article>
+          <article class="case">
+            <div class="case-image" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afk2c9d5f8f2?auto=format&fit=crop&w=1100&q=85')" role="img" aria-label="Analytics dashboard on laptop"></div>
+            <div class="case-body">
+              <div class="tag">Performance marketing</div>
+              <h3>Make every marketing rupee work harder.</h3>
+              <p>Measure beyond clicks with a practical focus on leads, sales, returns, cancellations and profitable growth.</p>
+              <div class="case-metrics"><div><strong>10–30x</strong><small>ROAS across selected campaigns</small></div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">How we work</div>
+          <h2>Clear thinking. Practical execution. Continuous improvement.</h2>
+          <p>No one-size-fits-all playbook. We start with your commercial goals and build a plan around the bottlenecks that matter most.</p>
+        </div>
+        <div class="process-grid">
+          <div class="step"><b>01 / DISCOVER</b><h3>Understand the business</h3><p>Review goals, customer segments, current performance and the barriers to growth.</p></div>
+          <div class="step"><b>02 / STRATEGISE</b><h3>Prioritise the opportunity</h3><p>Build a roadmap for channels, creative, commerce and measurement.</p></div>
+          <div class="step"><b>03 / EXECUTE</b><h3>Launch and learn</h3><p>Deliver campaigns and improvements, then test what works with real data.</p></div>
+          <div class="step"><b>04 / SCALE</b><h3>Improve what matters</h3><p>Optimise for stronger conversion, better efficiency and sustainable growth.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="image-band">
+          <div>
+            <div class="eyebrow">Built for ambitious teams</div>
+            <h2>Your marketing should move the business forward.</h2>
+            <p>Whether you need better acquisition, a stronger online store or a connected growth plan, Digital Buddy can help you identify the next best move.</p>
+            <a class="btn btn-primary" href="#contact">Start a conversation <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="wrap">
+        <div class="cta-card">
+          <div class="eyebrow">Let's build your next growth chapter</div>
+          <h2>Tell us where you want to go.</h2>
+          <p>Share your business goals and the challenges you want to solve. We'll start with a practical conversation about the right next steps.</p>
+          <div class="hero-actions" style="justify-content:center">
+            <a class="btn btn-primary" href="mailto:hello@digitalbuddy.pk">Email Digital Buddy ↗</a>
+            <a class="btn btn-outline" href="https://www.digitalbuddy.pk/">Visit digitalbuddy.pk</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <a class="logo" href="#top">digital<span>buddy</span>.</a>
+      <div>Performance marketing · E-commerce · Digital experiences</div>
+      <div class="footer-links"><a href="#services">Services</a><a href="#results">Results</a><a href="#contact">Contact</a></div>
+      <div>© <span id="year">2026</span> Digital Buddy. All rights reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
